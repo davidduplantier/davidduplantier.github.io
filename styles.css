@@ -6,3 +6,8 @@ body {
 h1 {
   font-family: 'ZCOOL QingKe HuangYou', cursive;
 }
+
+a:hover {
+  color: blue; 
+  text-decoration: none;
+}
