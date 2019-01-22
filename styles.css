@@ -3,6 +3,11 @@ body {
   font-family: 'ZCOOL QingKe HuangYou', cursive;
 }
 
+section {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
 h1 {
   font-family: 'ZCOOL QingKe HuangYou', cursive;
 }
