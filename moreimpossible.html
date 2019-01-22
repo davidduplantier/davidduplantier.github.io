@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Simple Game</title>
+  <style>
+    * { padding: 0; margin: 0; }
+    canvas { background: #eee; display: block; margin: 0 auto; }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas" width="480" height="320"></canvas>
+  <script>
+  let canvas = document.getElementById("gameCanvas");
+  let ctx = canvas.getContext("2d");
+
+  let paused = false;
+
+  let ball = [];
+  ball[0] = { x: canvas.width/2, y: canvas.height - 30, dx: 2, dy: -2 };
+  let x = canvas.width / 2;
+  let y = canvas.height - 30;
+  let dx = 2;
+  let dy = -2;
+  let ballRadius = 10;
+  let ballColorIndex = 0;
+  let ballColors = ["#0095DD", "#7E329F", "#7EED9F", "#7EED1D", "#11B0FC", "#F52412", "#F442E2"];
+
+  let paddleHeight = 10;
+  let paddleWidth = 75;
+  let paddleX = (canvas.width - paddleWidth) / 2;
+  let paddleSpeed = 7;
+
+  let bounceAudio = document.getElementById("bounce");
+  let hitAudio = document.getElementById("hit");
+
+  let rightPressed = false;
+  let leftPressed = false;
+  let justReleasedRight = 0;
+  let justReleasedLeft = 0;
+
+  let brickRowCount = 3;
+  let brickColumnCount = 5;
+  let brickWidth = 75;
+  let brickHeight = 20;
+  let brickPadding = 10;
+  let brickOffsetTop = 30;
+  let brickOffsetLeft = 30;
+
+  let score = 0;
+
+  let bricks = [];
+  for (let c = 0; c < brickColumnCount; c++) {
+    bricks[c] = [];
+    for (let r = 0; r < brickRowCount; r++) {
+      bricks[c][r] = { x: 0, y: 0, status: 1 };
+    }
+  }
+
+  function draw() {
+    if (!paused) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawBricks();
+      drawBalls();
+      collisionDetection();
+      drawScore();
+      drawPaddle();
+
+      for (let i = 0; i < ball.length; ++i) {
+        ball[i].x += ball[i].dx;
+        ball[i].y += ball[i].dy;
+      }
+      requestAnimationFrame(draw);
+    }
+  }
+
+  function drawBalls() {
+    for (let i = 0; i < ball.length; ++i) {
+      drawBall(i);
+    }
+  }
+
+  function drawBall(i) {
+    if (ball[i].y + ball[i].dy < ballRadius) {
+      ball[i].dy = -ball[i].dy;
+    }
+    else if (ball[i].y + ball[i].dy > canvas.height-ballRadius) {
+      if (ball[i].x > paddleX && ball[i].x < paddleX + paddleWidth) {
+        bounce.play();
+        ballColorIndex = (ballColorIndex + 1) % ballColors.length;
+        ctx.fillStyle = ballColors[ballColorIndex];
+        ball[i].dy = -ball[i].dy;
+        spawnNewBall(i);
+      }
+      else {
+        alert("GAME OVER");
+        document.location.reload();
+      }
+    }
+    if (ball[i].x + ball[i].dx < ballRadius || ball[i].x + ball[i].dx > canvas.width-ballRadius) {
+      ball[i].dx = -ball[i].dx;
+    }
+
+    ctx.beginPath();
+    ctx.arc(ball[i].x, ball[i].y, ballRadius, 0, Math.PI*2);
+    ctx.fillStyle = ballColors[ballColorIndex];
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  function drawPaddle() {
+    if (rightPressed && paddleX < canvas.width-paddleWidth) {
+      paddleX += paddleSpeed;
+    }
+    else if (leftPressed && paddleX > 0) {
+      paddleX -= paddleSpeed;
+    }
+    else if (justReleasedRight > 0 && paddleX < canvas.width-paddleWidth) {
+      paddleX += justReleasedRight * 2;
+      if (justReleasedRight - 1 > -1)
+        --justReleasedRight;
+    }
+    else if (justReleasedLeft > 0 && paddleD > 0) {
+      paddleX -= justReleasedLeft * 2;
+      if (justReleasedLeft - 1 > -1) {
+        --justReleasedLeft;
+      }
+    }
+
+    ctx.beginPath();
+    ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+    ctx.fillStyle = ballColors[ballColorIndex];
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  function drawBricks() {
+    for (let c = 0; c < brickColumnCount; c++) {
+      for (let r = 0; r < brickRowCount; r++) {
+          if (bricks[c][r].status === 1) {
+          let brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
+          let brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+          bricks[c][r].x = brickX;
+          bricks[c][r].y = brickY;
+          ctx.beginPath();
+          ctx.rect(brickX, brickY, brickWidth, brickHeight);
+          ctx.fillStyle = ballColors[ballColorIndex];
+          ctx.fill();
+          ctx.closePath();
+        }
+      }
+    }
+  }
+
+  function collisionDetection() {
+    for (let c = brickColumnCount-1; c > -1; --c) {
+      for (let r = brickRowCount-1; r > -1; --r) {
+        let b = bricks[c][r];
+        if (b.status === 1) {
+          for (let i = 0; i < ball.length; ++i) {
+            if (ball[i].x > b.x && ball[i].x < b.x+brickWidth && ball[i].y > b.y && ball[i].y < b.y+brickHeight) {
+              hit.play();
+              increaseLevel(i);
+              ball[i].dy = -ball[i].dy;
+              b.status = 0;
+              ++score;
+              if (score === brickRowCount * brickColumnCount) {
+                alert("YOU WIN, CONGRATULATIONS!");
+                document.location.reload();
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  function spawnNewBall(i) {
+    ball.push({ x: ball[i].x, y: ball[i].y, dx: -ball[i].dx, dy: ball[i].dy });
+  }
+
+  function drawScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Score: " + score, 8, 20);
+  }
+
+  function keyDownHandler(e) {
+    if (e.keyCode === 39) {
+      rightPressed = true;
+    }
+    else if (e.keyCode === 37) {
+      leftPressed = true;
+    }
+    else if (e.keyCode === 80) {
+      console.log("Pressed P");
+      if (paused) {
+        paused = false;
+        draw();
+      } else {
+        paused = true;
+      }
+    }
+  }
+
+  function increaseLevel(i) {
+    if (ball[i].dx > 0) { ++ball[i].dx; }
+    else        { --ball[i].dx; }
+    if (dy > 0) { ++ball[i].dy; }
+    else        { --ball[i].dy; }
+
+    if (score === 10) {
+      paddleSpeed *= 2;
+    }
+  }
+
+  function keyUpHandler(e) {
+    if (e.keyCode === 39) {
+      rightPressed = false;
+      justReleased = 5;
+    }
+    else if (e.keyCode === 37) {
+      leftPressed = false;
+      justReleased = 5;
+    }
+  }
+
+  document.addEventListener("keydown", keyDownHandler, false);
+  document.addEventListener("keyup", keyUpHandler, false);
+
+  draw();
+  </script>
+  <audio id="bounce" src="resources/bounce.wav" type="audio/wav"></audio>
+  <audio id="hit" src="resources/hit.wav" type="audio/wav"></audio>
+</body>
+</html>
