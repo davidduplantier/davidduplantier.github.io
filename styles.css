@@ -20,6 +20,10 @@ a:hover {
   color: blue; 
 }
 
+a:visited {
+  color: black; 
+}
+
 code {
     background-color: #eee;
     border-radius: 3px;
