@@ -13,8 +13,14 @@
   <script>
   let canvas = document.getElementById("gameCanvas");
   let ctx = canvas.getContext("2d");
+  let bound = canvas.getBoundingClientRect();
+  let leftBound = bound.left;
+  let rightBound = bound.right;
 
   let paused = false;
+
+  let mouseEvent = new MouseEvent("MouseEvent");
+  let mouseX = mouseEvent.screenX;
 
   let ball = [];
   ball[0] = { x: canvas.width/2, y: canvas.height - 30, dx: 2, dy: -2 };
@@ -109,6 +115,28 @@
   }
 
   function drawPaddle() {
+    if (isKeyPressed()) {
+      movePaddleWithKey();
+    } else {
+      movePaddleWithMouse();
+    }
+
+    ctx.beginPath();
+    ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+    ctx.fillStyle = ballColors[ballColorIndex];
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  function movePaddleWithMouse() {
+    mouseX = mouseEvent.screenX;
+    console.log(mouseX);
+    if (mouseX > leftBound && mouseX < rightBound) {
+      paddleX = mouseX - leftBound;
+    }
+  }
+
+  function movePaddleWithKey() {
     if (rightPressed && paddleX < canvas.width-paddleWidth) {
       paddleX += paddleSpeed;
     }
@@ -126,12 +154,10 @@
         --justReleasedLeft;
       }
     }
+  }
 
-    ctx.beginPath();
-    ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-    ctx.fillStyle = ballColors[ballColorIndex];
-    ctx.fill();
-    ctx.closePath();
+  function isKeyPressed() {
+    return leftPressed || rightPressed;
   }
 
   function drawBricks() {
