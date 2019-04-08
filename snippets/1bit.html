@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>David Duplantier &middot; 1-Bit Images</title>
+  <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../resources/css/main.css">
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <a class="navbar-brand" href="../index.html">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html#Resume">Resume</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html#Programming">Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html#Snippets">Snippets</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html#Contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="jumbotron main">
+    <h2 class="display-6">1-Bit Images</h2>
+    <hr class="my-4">
+    <h5>The Problem</h5>
+    <p>Write a script that converts an image to a 1-bit image, i.e. all pixels
+      are either white or black.
+    </p>
+    <h5>The Solution</h5>
+    <p>First, we convert the image to grayscale. Then, for each pixel in the image
+      we convert it to white or black depending on whether its intensity is less
+      than or greater to a threshold value (in this case, 128, half way between
+      0 and 255).
+    </p>
+    <p>When a pixel is converted to white or black, an error is created, defined
+      as the difference between the original intensity value and new value. We
+      spread this error to the adjacent pixels that have not yet been visited, by
+      adding the error multiplied by a factor between 0 and 1 to its current
+      intensity.
+    </p>
+    <p>Note: the image is saved in the PNG format to ensure all pixels remain
+      black or white (other file types will also maintain the correct colors).
+      File types such as JPEG will change the pixel intensities in the process
+      of saving the image, introducing gray pixels.
+    </p>
+    <pre>
+    <code>
+import os, sys
+from PIL import Image, ImageOps
+
+def addErr(im, xy, err):
+    r, g, b = im.getpixel(xy)
+    im.putpixel(xy, (round(r+err), round(g+err), round(b+err)))
+
+def roundPixel(im, xy, threshold):
+    r, g, b = im.getpixel(xy)
+    if r < threshold:
+        im.putpixel(xy, (0, 0, 0))
+        return r
+    else:
+        im.putpixel(xy, (255, 255, 255))
+        return r - 255
+
+def mask(im, xy):
+  x, y = xy
+  err = roundPixel(im, xy, 128)
+  if x + 1 < im.width:
+    addErr(im, (x+1, y), err * 7/16)
+    if y + 1 < im.height:
+      addErr(im, (x+1, y+1), err * 1/16)
+      addErr(im, (x, y+1), err * 5/16)
+      if x - 1 > -1:
+        addErr(im, (x-1, y+1), err * 3/16)
+
+def dither(im):
+  for y in range(im.height):
+    for x in range(im.width):
+      mask(im, (x,y))
+
+infile = sys.argv[1]
+f, e = os.path.splitext(infile)
+
+try:
+  im = Image.open(infile).copy()
+  ImageOps.grayscale(im)
+  dither(im)
+  im.save(f + "OneBit.png", "PNG")
+except:
+  print("Error\n")
+    </code>
+    </pre>
+  </div>
+</body>
+</html>

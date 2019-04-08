@@ -7,3 +7,11 @@
     margin: 20px 0;
   }
 }
+
+code {
+    color: "black"
+    background-color: "white";
+    border-radius: 3px;
+    font-family: courier, monospace;
+    padding: 0 3px;
+}

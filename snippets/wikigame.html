@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>David Duplantier &middot; The Wikipedia Game</title>
+  <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../resources/css/main.css">
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <a class="navbar-brand" href="../index.html">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html#Resume">Resume</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html#Programming">Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html#Snippets">Snippets</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html#Contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="jumbotron main">
+    <h2 class="display-6">The Wikipedia Game</h2>
+    <hr class="my-4">
+    <h5>The Problem</h5>
+    <p>Write a script whose input takes two Wikipedia article topics and finds the
+      shortest path from one article to the other, where a path is formed by following
+      links in an article body.
+    </p>
+    <h5>The Solution</h5>
+    <p>This snippet demonstrates a quick, initial approach at a solution, which employs
+      a straightforward application of breadth first search. Using the BeautifulSoup
+      HTML parser it is easy to retrieve all article links (see the getArticleLinks
+      function below).
+    </p>
+    <p>The large number of article links per page ensures that the queue used in
+      a breadth first search grows quickly, and, unsurprisingly, the program runs
+      slowly given that a request plus a BeautifulSoup object must be made for
+      each article.
+    </p>
+    <p>Besides the computational cost of this approach, another unsatisfactory
+      behavior is its agnosticism towards the order in which to search article
+      links. A human playing the Wikipedia Game, currently at the "France" page
+      and searching for the "Banana" page, will likely skip the History, Politics,
+      etc. sections and survey the "Cuisine" subsection first. Thus, it could prove
+      beneficial to add links to the queue in order of their relevance to the
+      destination article topic. This might be done using natural language processing,
+      or even through training a classifier that examines the results of playing <thead>
+      Wikipedia game.
+      </thead>
+    </p>
+    <pre>
+    <code>
+import requests
+from bs4 import BeautifulSoup
+import sys
+from queue import *
+import re
+
+WIKI_URL_BASE = "https://en.wikipedia.org/wiki/"
+WIKI_MAIN_CONTENT_ID = "mw-content-text"
+
+def getArticleLinks(soup):
+    return soup.find(id=WIKI_MAIN_CONTENT_ID).find_all("a", href=re.compile("^/wiki/"))
+
+def getHTML(link):
+    request = requests.get(link);
+    if request.status_code == 200:
+        return BeautifulSoup(request.text, "html.parser")
+    else:
+        print(f"Error retrieving link: {link}")
+        return None
+
+def addNewArticles(s, q, links):
+    for link in links:
+        title = link['href'].replace("/wiki/", "")
+        if title not in s:
+            s.add(title)
+            q.put(title)
+
+def wikipediaBFS(beginTitle, destTitle):
+    s = set()
+    q = Queue()
+    q.put(beginTitle)
+
+    while not(q.empty()):
+        article = q.get()
+        print(f"{article}")
+        if article == destTitle:
+            return True
+        nextHTML = getHTML(WIKI_URL_BASE + article)
+        if nextHTML is not None:
+            links = getArticleLinks(nextHTML)
+            addNewArticles(s, q, links)
+
+    return False
+
+beginTitle = sys.argv[1].replace(" ", "_")
+destTitle = sys.argv[2].replace(" ", "_")
+result = wikipediaBFS(beginTitle, destTitle)
+print(f"{result}")
+    </code>
+    </pre>
+  </div>
+</body>
+</html>

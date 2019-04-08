@@ -3,3 +3,6 @@
 
 # Articles
 *.txt
+
+# Templates
+*Template.html
