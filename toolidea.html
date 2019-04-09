@@ -29,8 +29,46 @@
   </nav>
 
   <div class="jumbotron main">
-    <h2 class="display-6">Title</h2>
+    <h2 class="display-6">Automatic Code Generation</h2>
     <hr class="my-4">
+    <p>A friend once complained while completing a tedious programming assignment, "I shouldn't have to reinvent this if there's already
+    an accepted solution!" While he was only half-joking and well aware of the benefits of learning to program foundational algorithms
+    from scratch, entertaining his complaint leads us to an interesting observation of how computer programmers as a whole violate one
+    of the simplest rules for good software design, namely the "Don't Repeat Yourself" (DRY) principle.
+    </p>
+    <p>The DRY principle advises that identical code used in different places should be rewritten in a single unit (such as a function), in
+    order that changes to the code are confined to one place. This makes it much easier to maintain software as it evolves. Returning
+    to the friend's complaint, what about identical code rewritten by different programmers in various projects? Could this be considered
+    a higher-level violation of the DRY principle, because software professionals are needlessly spending time writing the same code over
+    and over again and making the same mistakes?
+    </p>
+    <p>That this hypothesized violation of DRY is not superfluous is evidenced by the predominant use of StackOverflow to search for
+    solutions to common questions among programmers. In other words, StackOverflow answers form a database of solutions so that programmers
+    do not have to reinvent everything from scratch. This possibly suggests that code snippets from highly upvoted answers this code are
+    widely used throughout codebases in the real world. If programmers can agree that a specific solution is the best one for a specific use
+    case, why not have a code generation tool that automatically fills in the accepted solution?
+    </p>
+    <p>What would usage for such a tool look like? Imagine a web developer is working with an instance of a Map object with variable name
+    map, and wishes to iterate through map and add 5 to each value. Perhaps she could
+    simply write something like:
+    </p>
+    <pre>
+    <code>
+    ITERATE map ADD 5
+    </code>
+    </pre>
+    <p>which subsequently generates the JavaScript code, where the previous high level description is interpreted as:
+    </p>
+    <pre>
+    <code>
+    [Action on Object] [Object] [Action on Element] [Action on Element Argument]
+    </code>
+    </pre>
+    <p>There might be a database of actions to select from, and if one does not exist, it can be added by manually coding it and giving it
+    a name. Furthermore, this high level language need not be specific to a single language, but be capable of translating the same specification
+    into different programming languages. For example, the above iteration through a map could be translated into JavaScript, Java, C++, etc.
+    which all possess Map objects.
+    </p>
   </div>
 </body>
 </html>
