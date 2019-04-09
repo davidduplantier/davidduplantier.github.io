@@ -11,10 +11,6 @@ links = document.getElementsByTagName("a")
 
 for (let i = 0; i < links.length; ++i) {
   currColor = links[i].style.color;
-  links[i].addEventListener("mouseenter", function(event) {
-    event.target.style.color = getRandomColor();
-  });
-  links[i].addEventListener("mouseleave", function(event) {
-    event.target.style.color = currColor;
-  });
+  links[i].addEventListener("mouseenter", e => e.target.style.color = getRandomColor());
+  links[i].addEventListener("mouseleave", e => e.target.style.color = currColor);
 }
