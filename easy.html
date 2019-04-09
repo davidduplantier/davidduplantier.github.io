@@ -70,6 +70,7 @@
         ball[i].x += ball[i].dx;
         ball[i].y += ball[i].dy;
       }
+
       requestAnimationFrame(draw);
     }
   }
@@ -94,6 +95,7 @@
       }
       else {
         alert("GAME OVER");
+        ball[0] = { x: canvas.width/2, y: canvas.height - 30, dx: 2, dy: -2 };
         document.location.reload();
       }
     }
