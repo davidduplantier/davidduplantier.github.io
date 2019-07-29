@@ -16,6 +16,22 @@ code {
     padding: 0 3px;
 }
 
+.keyword {
+  color: #d73a49;
+}
+
+.functionTitle {
+  color: #6f42c1;
+}
+
+.string {
+  color: #032f62;
+}
+
+.token {
+  color: #005cc5;
+}
+
 .imageHeader {
   text-align: center;
   margin-bottom: 24px;
@@ -27,6 +43,33 @@ code {
   padding-right: 10px;
 }
 
+.leftBox {
+  float: left;
+  margin-right: 20%;
+}
+
+.rightBox {}
+
+.feature {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.featureImg {
+  border-radius: 10px;
+  width: 40%;
+  height: 20%;
+  padding-bottom: 20px;
+}
+
 a:hover {
   text-decoration: none;
+}
+
+#new {
+  color: white;
+  font-weight: bold;
+  padding: 2px;
+  background-color: red;
+  border-radius: 5px;
 }

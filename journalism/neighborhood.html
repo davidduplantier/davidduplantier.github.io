@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>What Boston's neighborhood is your best fit?</title>
+    <style>
+    @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+
+      body {
+        background-image: url("photo/boston.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      h1 {
+        text-align: center;
+        padding-bottom: 5%;
+        font-family: "Source Sans Pro", sans-serif;
+      }
+
+      h3 {
+        text-align: center;
+        padding-bottom: 2%;
+
+      }
+
+      #choices {
+        text-align: center;
+
+      }
+
+      #button {
+        display: none;
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        margin-top: 3%;
+        border-radius: 5px;
+        margin-left: 40%;
+        width: 20%;
+      }
+
+    </style>
+
+    <script language="javascript">
+      let cat1 = false;
+      let cat2 = false;
+      let cat3 = false;
+      let buttonsClicked = 0;
+
+      function changeImage1() {
+          if (document.getElementById("imgChange1").src.endsWith("rent0.png"))
+          {
+            document.getElementById("imgChange1").src = "photo/rent1.png";
+            cat1 = true;
+            ++buttonsClicked;
+          }
+          else
+          {
+            document.getElementById("imgChange1").src = "photo/rent0.png";
+            cat1 = false;
+            --buttonsClicked;
+          }
+          showButton();
+      }
+
+      function changeImage2() {
+
+          if (document.getElementById("imgChange2").src.endsWith("safety0.png"))
+          {
+            document.getElementById("imgChange2").src = "photo/safety1.png";
+            cat2 = true;
+            ++buttonsClicked;
+          }
+          else
+          {
+            document.getElementById("imgChange2").src = "photo/safety0.png";
+            cat2 = false;
+            --buttonsClicked;
+          }
+          showButton();
+      }
+
+      function changeImage3() {
+
+          if (document.getElementById("imgChange3").src.endsWith("mbta0.png"))
+          {
+            document.getElementById("imgChange3").src = "photo/mbta1.png";
+            cat3 = true;
+            ++buttonsClicked;
+          }
+          else
+          {
+            document.getElementById("imgChange3").src = "photo/mbta0.png";
+            cat3 = false;
+            --buttonsClicked;
+          }
+          showButton();
+      }
+
+      function changeImage4() {
+
+          if (document.getElementById("imgChange4").src.endsWith("young0.png"))
+          {
+            document.getElementById("imgChange4").src = "photo/young1.png";
+            cat3 = true;
+            ++buttonsClicked;
+          }
+          else
+          {
+            document.getElementById("imgChange4").src = "photo/young0.png";
+            cat3 = false;
+            --buttonsClicked;
+          }
+          showButton();
+      }
+
+      function changeImage5() {
+
+          if (document.getElementById("imgChange5").src.endsWith("diversity0.png"))
+          {
+            document.getElementById("imgChange5").src = "photo/diversity1.png";
+            cat3 = true;
+            ++buttonsClicked;
+          }
+          else
+          {
+            document.getElementById("imgChange5").src = "photo/diversity0.png";
+            cat3 = false;
+            --buttonsClicked
+          }
+          showButton();
+      }
+
+      function changeImage6() {
+
+          if (document.getElementById("imgChange6").src.endsWith("foreign0.png"))
+          {
+            document.getElementById("imgChange6").src = "photo/foreign1.png";
+            cat3 = true;
+            ++buttonsClicked;
+          }
+          else
+          {
+            document.getElementById("imgChange6").src = "photo/foreign0.png";
+            cat3 = false;
+            --buttonsClicked;
+          }
+          showButton();
+      }
+
+      function changeImage7() {
+
+          if (document.getElementById("imgChange7").src.endsWith("grocery0.png"))
+          {
+            document.getElementById("imgChange7").src = "photo/grocery1.png";
+            cat3 = true;
+            ++buttonsClicked;
+          }
+          else
+          {
+            document.getElementById("imgChange7").src = "photo/grocery0.png";
+            cat3 = false;
+            --buttonsClicked;
+          }
+          showButton();
+      }
+
+      function showButton() {
+        if (canShowButton()) {
+        document.getElementById("button").style.display = "block";
+        } else {
+        document.getElementById("button").style.display = "none";
+        }
+      }
+
+      function canShowButton() {
+        return buttonsClicked === 3;
+      }
+
+      
+
+    </script>
+  </head>
+  <body>
+    <h1>What's your ideal Boston's neighborhood?</h1>
+    <h3>Choose up to three factors that you care about the most when choosing a place to live</h3>
+    <div id = "choices">
+      <img src="photo/rent0.png" width="10%" height="10%" id="imgChange1" onclick="changeImage1()" draggable="true">
+      <img src="photo/safety0.png" width="10%" height="10%" id="imgChange2" onclick="changeImage2()" draggable="true">
+      <img src="photo/mbta0.png" width="10%" height="10%" id="imgChange3" onclick="changeImage3()" draggable="true">
+      <img src="photo/young0.png" width="10%" height="10%" id="imgChange4" onclick="changeImage4()" draggable="true">
+      <img src="photo/diversity0.png" width="10%" height="10%" id="imgChange5" onclick="changeImage5()" draggable="true">
+      <img src="photo/foreign0.png" width="10%" height="10%" id="imgChange6" onclick="changeImage6()" draggable="true">
+      <img src="photo/grocery0.png" width="10%" height="10%" id="imgChange7" onclick="changeImage7()" draggable="true">
+    </div>
+    <br>
+    <button id="button" type="button">Show me my neighborhood!</button>
+  </body>
+</html>
