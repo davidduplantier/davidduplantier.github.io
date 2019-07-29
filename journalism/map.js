@@ -3,7 +3,6 @@ let startLat = 42.3464661;
 let startLong = -71.0744381;
 let startZoom = 13.18;
 let map = L.map('map').setView([startLat, startLong], startZoom);
-map.invalidateSize();
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -11,6 +10,8 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
     id: 'mapbox.streets',
     accessToken: 'pk.eyJ1IjoiZGR1cGxhbnQiLCJhIjoiY2p5MzU5Y2FpMHcyMjNicTh1c3Jqbzl1dyJ9.u02VQdp7VPZCOMT-RYn-VA'
 }).addTo(map);
+
+map.invalidateSize();
 
 /* On clicking next, switch from input page to result page */
 document.getElementById("button").addEventListener("click", function() {
@@ -48,9 +49,13 @@ function addNeighborhoodDataToMap(neighborhood) {
     L.geoJSON(geoJSONFeature).addTo(map);
   }
 
+  let trainMarker = L.icon({
+    iconUrl: 'photo/mbta.png',
+    iconSize: [25, 25]
+  });
   let polylines = getPolyLines(neighborhood);
   for (polyline of polylines) {
-    let movingMarker = L.Marker.movingMarker(polyline, 20000, {loop: true}).addTo(map);
+    let movingMarker = L.Marker.movingMarker(polyline, 20000, {loop: true, icon: trainMarker}).addTo(map);
     movingMarker.start();
   }
 }
