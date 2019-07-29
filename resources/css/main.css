@@ -67,7 +67,12 @@ code {
 
 .featureImg {
   border-radius: 10px;
-  width: 60%;
+  width: 40%;
+}
+
+#selfImage {
+  border-radius: 10px;
+  width: 40%;
 }
 
 a:hover {
