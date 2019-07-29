@@ -68,6 +68,7 @@ code {
 .featureImg {
   border-radius: 10px;
   width: 40%;
+  float: left;
 }
 
 #selfImage {
