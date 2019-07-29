@@ -43,12 +43,22 @@ code {
   padding-right: 10px;
 }
 
-.leftBox {
-  float: left;
-  margin-right: 20%;
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
 }
 
-.rightBox {}
+.box {
+  width: 50%;
+  margin: 10px;
+  text-align: center;
+}
+
+.box-sm {
+  width: 40%;
+  margin: 10px;
+  text-align: center;
+}
 
 .feature {
   text-align: center;
@@ -57,9 +67,7 @@ code {
 
 .featureImg {
   border-radius: 10px;
-  width: 40%;
-  height: 20%;
-  padding-bottom: 20px;
+  width: 60%;
 }
 
 a:hover {
@@ -70,6 +78,6 @@ a:hover {
   color: white;
   font-weight: bold;
   padding: 2px;
-  background-color: red;
+  background-color: green;
   border-radius: 5px;
 }
