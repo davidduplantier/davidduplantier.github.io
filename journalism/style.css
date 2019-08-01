@@ -29,6 +29,11 @@ h4 {
   padding-bottom: 2%;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 a:hover {
   color: white;
 }

@@ -1,10 +1,10 @@
 /* Set up map */
 let map = null;
 
-function setUpMap() {
-  let startLat = 42.3464661;
-  let startLong = -71.0744381;
-  let startZoom = 13.18;
+function setUpMap(neighborhood) {
+  let startLat = viewCoords[neighborhood][0];
+  let startLong = viewCoords[neighborhood][1];
+  let startZoom = viewCoords[neighborhood][2];
 
   map = L.map('map').setView([startLat, startLong], startZoom);
 
@@ -34,10 +34,6 @@ function updateOutputPage(neighborhood) {
   for (node of nodes) {
     node.innerHTML = neighborhood;
   }
-
-  let latlong = [viewCoords[neighborhood][0], viewCoords[neighborhood][1]];
-  let zoom = viewCoords[neighborhood][2];
-  map.setView(latlong, zoom);
 
   addNeighborhoodDataToMap(neighborhood);
 }
