@@ -46,8 +46,8 @@ a:hover {
   display: none;
   background-color: white;
   opacity: .7;
-  border: solid #4CAF50;
-  color: #4CAF50;
+  border: solid #F5E942;
+  color: #2E2E2D;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -59,7 +59,7 @@ a:hover {
 }
 
 #button:hover {
-  background-color: #4CAF50;
+  background-color: #F5E942;
   color: white;
   opacity: 1;
 }

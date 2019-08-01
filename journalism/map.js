@@ -1,27 +1,31 @@
 /* Set up map */
-let startLat = 42.3464661;
-let startLong = -71.0744381;
-let startZoom = 13.18;
-let map = L.map('map').setView([startLat, startLong], startZoom);
+let map = null;
 
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox.streets',
-    accessToken: 'pk.eyJ1IjoiZGR1cGxhbnQiLCJhIjoiY2p5MzU5Y2FpMHcyMjNicTh1c3Jqbzl1dyJ9.u02VQdp7VPZCOMT-RYn-VA'
-}).addTo(map);
+function setUpMap() {
+  let startLat = 42.3464661;
+  let startLong = -71.0744381;
+  let startZoom = 13.18;
 
-map.invalidateSize();
+  map = L.map('map').setView([startLat, startLong], startZoom);
+
+  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom: 18,
+      id: 'mapbox.streets',
+      accessToken: 'pk.eyJ1IjoiZGR1cGxhbnQiLCJhIjoiY2p5MzU5Y2FpMHcyMjNicTh1c3Jqbzl1dyJ9.u02VQdp7VPZCOMT-RYn-VA'
+  }).addTo(map);
+}
 
 /* On clicking next, switch from input page to result page */
 document.getElementById("button").addEventListener("click", function() {
+  document.getElementById("inputPage").hidden = true;
+  document.getElementById("resultPage").hidden = false;
+
   let result = calculateResult();
+  setUpMap(result);
   updateOutputPage(result);
 
   document.querySelector("body").style.backgroundImage = "url('photo/boston5.png')";
-
-  document.getElementById("inputPage").hidden = true;
-  document.getElementById("resultPage").hidden = false;
 });
 
 /* Update output page to display results for calculated neighborhood */
