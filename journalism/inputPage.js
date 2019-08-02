@@ -152,7 +152,5 @@ function calculateResult() {
     }
   }
 
-  console.log(category1 + ", " + category2 + ", " + category3);
-
   return calcTopNeighborhood(category1, category2, category3);
 }

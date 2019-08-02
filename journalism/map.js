@@ -49,13 +49,11 @@ function addNeighborhoodDataToMap(neighborhood) {
     L.geoJSON(geoJSONFeature).addTo(map);
   }
 
-  let trainMarker = L.icon({
-    iconUrl: 'photo/mbta.png',
-    iconSize: [25, 25]
-  });
+  let trainMarker = L.icon({ iconUrl: 'photo/mbta.png', iconSize: [25, 25] });
   let polylines = getPolyLines(neighborhood);
   for (polyline of polylines) {
     let movingMarker = L.Marker.movingMarker(polyline, 20000, {loop: true, icon: trainMarker}).addTo(map);
     movingMarker.start();
+    L.geoJSON([{"type": "LineString", "coordinates": polyline}]).addTo(map);
   }
 }

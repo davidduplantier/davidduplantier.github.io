@@ -43,6 +43,10 @@ a:hover {
   font-size: 25px;
 }
 
+.magazineColor {
+  color: #FFD700;
+}
+
 #choices {
   text-align: center;
 }
