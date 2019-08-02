@@ -49,8 +49,8 @@ a:hover {
 
 #fologo {
   position: absolute;
-  top: 15px;
-  left: 15px;
+  top: 0px;
+  left: 8px;
   width: 8%;
 }
 
