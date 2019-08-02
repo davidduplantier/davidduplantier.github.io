@@ -47,6 +47,13 @@ a:hover {
   color: #FFD700;
 }
 
+#fologo {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 8%;
+}
+
 #choices {
   text-align: center;
 }
