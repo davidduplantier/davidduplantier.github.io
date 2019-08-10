@@ -51,9 +51,21 @@ function addNeighborhoodDataToMap(neighborhood) {
 
   let trainMarker = L.icon({ iconUrl: 'photo/mbta.png', iconSize: [25, 25] });
   let polylines = getPolyLines(neighborhood);
+  addColoredMBTARoutes(neighborhood);
   for (polyline of polylines) {
-    let movingMarker = L.Marker.movingMarker(polyline, 20000, {loop: true, icon: trainMarker}).addTo(map);
+    //let trainMarker = L.icon({ iconUrl: trainMarker, iconSize: [25, 25] });
+    let movingMarker = L.Marker.movingMarker(polyline.geometry, 20000, {loop: true, icon: trainMarker}).addTo(map);
     movingMarker.start();
-    L.geoJSON([{"type": "LineString", "coordinates": polyline}]).addTo(map);
+  }
+}
+
+function addColoredMBTARoutes(neighborhood) {
+  let polylinesSwitched = getPolyLinesSwitched(neighborhood);
+  for (polyline of polylinesSwitched) {
+    let myStyle = {
+      "color": colorByRoute[polyline.routeName],
+      "weight": 3
+    };
+    L.geoJSON({"type": "LineString", "coordinates": polyline.geometry}, {style: myStyle}).addTo(map);
   }
 }

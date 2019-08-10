@@ -112,6 +112,34 @@ let neighborhoodRoutes = {
   "West Roxbury": ["Orange Line"]
 }
 
+let colorByRoute = {
+  "Boston College (B)": "#1D7535",
+  "Cleveland Circle (C)": "#1D7535",
+  "Riverside (D)": "#1D7535",
+  "Heath St. (E)": "#1D7535",
+  "Orange Line": "#FFAA00",
+  "Blue Line": "#092FED",
+  "Braintree": "#E31010",
+  "Mattapan": "#E31010",
+  "Airport Terminals": "#969696",
+  "Boston Marine Industrial Park": "#969696",
+  "Washington St.": "#969696"
+};
+
+let logoByRoute = {
+  "Boston College (B)": "photo/greenline.png",
+  "Cleveland Circle (C)": "photo/greenline.png",
+  "Riverside (D)": "photo/greenline.png",
+  "Heath St. (E)": "photo/greenline.png",
+  "Orange Line": "photo/orangeline.png",
+  "Blue Line": "photo/mbta.png",
+  "Braintree": "photo/redline.png",
+  "Mattapan": "photo/redline.png",
+  "Airport Terminals": "photo/mbta.png",
+  "Boston Marine Industrial Park": "photo/mbta.png",
+  "Washington St.": "photo/mbta.png"
+}
+
 /* Neighborhood ranks for each category */
 let rankings = {
   "Allston":           { "Rent": 9, "Safety": 7, "Transportation": 10, "Schools": 3, "Population": 7, "Diversity": 3, "Food": 2 },
@@ -155,19 +183,70 @@ function calcTopNeighborhood(category1, category2, category3) {
   return list[0].name;
 }
 
+// /* Get routes for public transportation passing through the given neighborhood */
+// function getPolyLines(neighborhood) {
+//   let routeNames = neighborhoodRoutes[neighborhood];
+//   let lineCoords = [];
+//
+//   for (routeName of routeNames) {
+//     let coords = [];
+//
+//     for (let i = 0; i < mbtaGeoJSON.length; ++i) {
+//       if (mbtaGeoJSON[i]["properties"]["name"] === routeName) {
+//         for (let j = 0; j < mbtaGeoJSON[i]["geometry"]["coordinates"].length; ++j) {
+//           let point = mbtaGeoJSON[i]["geometry"]["coordinates"][j];
+//           coords.push([point[1], point[0]]);
+//         }
+//         lineCoords.push(coords);
+//         break;
+//       }
+//     }
+//
+//   }
+//
+//   return lineCoords;
+// }
+
 /* Get routes for public transportation passing through the given neighborhood */
 function getPolyLines(neighborhood) {
   let routeNames = neighborhoodRoutes[neighborhood];
   let lineCoords = [];
 
   for (routeName of routeNames) {
-    let coords = [];
+    let coords = {};
+    coords.routeName = routeName;
+    coords.geometry = [];
 
     for (let i = 0; i < mbtaGeoJSON.length; ++i) {
       if (mbtaGeoJSON[i]["properties"]["name"] === routeName) {
         for (let j = 0; j < mbtaGeoJSON[i]["geometry"]["coordinates"].length; ++j) {
           let point = mbtaGeoJSON[i]["geometry"]["coordinates"][j];
-          coords.push([point[1], point[0]]);
+          coords.geometry.push([point[1], point[0]]);
+        }
+        lineCoords.push(coords);
+        break;
+      }
+    }
+
+  }
+
+  return lineCoords;
+}
+
+function getPolyLinesSwitched(neighborhood) {
+  let routeNames = neighborhoodRoutes[neighborhood];
+  let lineCoords = [];
+
+  for (routeName of routeNames) {
+    let coords = {};
+    coords.routeName = routeName;
+    coords.geometry = [];
+
+    for (let i = 0; i < mbtaGeoJSON.length; ++i) {
+      if (mbtaGeoJSON[i]["properties"]["name"] === routeName) {
+        for (let j = 0; j < mbtaGeoJSON[i]["geometry"]["coordinates"].length; ++j) {
+          let point = mbtaGeoJSON[i]["geometry"]["coordinates"][j];
+          coords.geometry.push(point);
         }
         lineCoords.push(coords);
         break;
