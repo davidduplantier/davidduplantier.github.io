@@ -90,9 +90,13 @@ header {
 }
 
 #map {
-  margin: auto;
-  /* height: 500px;
-  width: 700px; */
+  border-radius: 1em;
+}
+
+#infoSection {
+  margin-left: 25px;
+  background-color: #E0E0E0;
+  border-radius: 1em;
 }
 
 #attribution {

@@ -15,7 +15,7 @@
 </head>
 <body>
   <header>
-    <a href="https://foreignobserver.net/"><img src="photo/foexplore5.png" id="fologo"></a>
+    <a href="https://foreignobserver.net/"><img src="photo/foexplore6.png" id="fologo"></a>
   </header>
   <main>
     <div id="inputPage">
@@ -52,7 +52,15 @@
     </div>
     <div id="resultPage" hidden>
       <h1>Your neighborhood is: <span class="resultText"></span> !</h1>
-      <div style="width: 700px; height: 500px;" id="map" class="leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom"></div>
+      <div class="container">
+        <div class="row">
+          <div style="width: 700px; height: 500px;" id="map" class="col-lg leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom"></div>
+          <div id="infoSection" class="col-lg">
+            <h3>About <span class="resultText"></span></h3>
+            <p id="neighborhoodInfo"></p>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
   <script src="inputPage.js"></script>

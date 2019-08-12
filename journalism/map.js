@@ -24,8 +24,6 @@ document.getElementById("button").addEventListener("click", function() {
   let result = calculateResult();
   setUpMap(result);
   updateOutputPage(result);
-
-  document.querySelector("body").style.backgroundImage = "url('photo/boston5.png')";
 });
 
 /* Update output page to display results for calculated neighborhood */
@@ -34,16 +32,17 @@ function updateOutputPage(neighborhood) {
   for (node of nodes) {
     node.innerHTML = neighborhood;
   }
-
+  addNeighborhoodInfo(neighborhood);
   addNeighborhoodDataToMap(neighborhood);
+}
+
+function addNeighborhoodInfo(neighborhood) {
+  let infoSection = document.getElementById("neighborhoodInfo");
+  infoSection.innerHTML = neighborhoodInfo[neighborhood];
 }
 
 /* Add all data to map for the given neighborhood */
 function addNeighborhoodDataToMap(neighborhood) {
-  let pinCoord = pinCoords[neighborhood];
-  let pin = L.marker(pinCoord).addTo(map);
-  pin.bindPopup(popupInfo[neighborhood]);
-
   let geoJSONFeature = getNeighborhoodBound(neighborhood);
   if (geoJSONFeature) {
     L.geoJSON(geoJSONFeature).addTo(map);
