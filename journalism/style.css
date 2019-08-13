@@ -89,14 +89,13 @@ header {
   opacity: 1;
 }
 
-#map {
+.outputSection {
   border-radius: 1em;
+  margin: 20px;
 }
 
 #infoSection {
-  margin-left: 25px;
   background-color: #E0E0E0;
-  border-radius: 1em;
 }
 
 #attribution {
