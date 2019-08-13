@@ -28,10 +28,7 @@ document.getElementById("button").addEventListener("click", function() {
 
 /* Update output page to display results for calculated neighborhood */
 function updateOutputPage(neighborhood) {
-  let nodes = document.querySelectorAll(".resultText");
-  for (node of nodes) {
-    node.innerHTML = neighborhood;
-  }
+  document.querySelectorAll(".resultText").forEach((el) => el.innerHTML = neighborhood);
   addNeighborhoodInfo(neighborhood);
   addNeighborhoodDataToMap(neighborhood);
 }
