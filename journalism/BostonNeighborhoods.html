@@ -18,6 +18,7 @@
     <a href="https://foreignobserver.net/"><img src="photo/foexplore6.png" id="fologo"></a>
   </header>
   <main>
+
     <div id="inputPage">
       <h1>What's your ideal Boston neighborhood?</h1>
       <h4>By <a href="https://davidduplantier.github.io/">David Duplantier</a> and <a href="https://haminhta.github.io/">Ha Ta</a></h4>
@@ -25,31 +26,32 @@
       <div id="choices" class="container">
         <div class="row">
           <div class="col-md">
-            <img src="photo/rent0.png" width="100%" height="100%" id="imgChange1" onclick="changeImage1()">
+            <img class="buttonImg" src="photo/unselected0.png" width="100%" height="100%" id="imgChange1">
           </div>
           <div class="col-md">
-            <img src="photo/safety0.png" width="100%" height="100%" id="imgChange2" onclick="changeImage2()">
+            <img class="buttonImg" src="photo/unselected1.png" width="100%" height="100%" id="imgChange2">
           </div>
           <div class="col-md">
-            <img src="photo/mbta0.png" width="100%" height="100%" id="imgChange3" onclick="changeImage3()">
+            <img class="buttonImg" src="photo/unselected2.png" width="100%" height="100%" id="imgChange3">
           </div>
           <div class="col-md">
-            <img src="photo/young0.png" width="100%" height="100%" id="imgChange4" onclick="changeImage4()">
+            <img class="buttonImg" src="photo/unselected3.png" width="100%" height="100%" id="imgChange4">
           </div>
           <div class="col-md">
-            <img src="photo/diversity0.png" width="100%" height="100%" id="imgChange5" onclick="changeImage5()">
+            <img class="buttonImg" src="photo/unselected4.png" width="100%" height="100%" id="imgChange5">
           </div>
           <div class="col-md">
-            <img src="photo/foreign0.png" width="100%" height="100%" id="imgChange6" onclick="changeImage6()">
+            <img class="buttonImg" src="photo/unselected5.png" width="100%" height="100%" id="imgChange6">
           </div>
           <div class="col-md">
-            <img src="photo/grocery0.png" width="100%" height="100%" id="imgChange7" onclick="changeImage7()">
+            <img class="buttonImg" src="photo/unselected6.png" width="100%" height="100%" id="imgChange7">
           </div>
         </div>
       </div>
       <br>
       <button id="button" type="button">Show me my neighborhood!</button>
     </div>
+
     <div id="resultPage" hidden>
       <h1>Your neighborhood is: <span class="resultText"></span> !</h1>
       <div class="container">
@@ -62,6 +64,7 @@
         </div>
       </div>
     </div>
+
   </main>
   <script src="inputPage.js"></script>
   <script src="Boston_Neighborhoods.geojson"></script>
@@ -69,6 +72,6 @@
   <script type="text/javascript" src="MovingMarker.js"></script>
   <script src="geo.js"></script>
   <script src="data.js"></script>
-  <script src="map.js"></script>
+  <script src="outputPage.js"></script>
 </body>
 </html>

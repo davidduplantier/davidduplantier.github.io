@@ -43,9 +43,10 @@ function addNeighborhoodInfo(neighborhood) {
 
 /* Add all data to map for the given neighborhood */
 function addNeighborhoodDataToMap(neighborhood) {
+  let boundStyle = { "color": "#46a630" };
   let geoJSONFeature = getNeighborhoodBound(neighborhood);
   if (geoJSONFeature) {
-    L.geoJSON(geoJSONFeature).addTo(map);
+    L.geoJSON(geoJSONFeature, { style: boundStyle }).addTo(map);
   }
 
   let trainMarker = L.icon({ iconUrl: 'photo/mbta.png', iconSize: [25, 25] });

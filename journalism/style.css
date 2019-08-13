@@ -69,10 +69,8 @@ header {
 
 #button {
   display: none;
-  background-color: white;
-  opacity: .4;
-  border: solid #FFD700;
-  color: #2E2E2D;
+  background-color: rgba(255, 215, 0, .5);
+  color: black;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -84,18 +82,17 @@ header {
 }
 
 #button:hover {
-  background-color: #FFD700;
-  color: white;
-  opacity: 1;
+  background-color: rgba(255, 215, 0, 1);
 }
 
 .outputSection {
   border-radius: 1em;
   margin: 20px;
+  padding: 15px;
 }
 
 #infoSection {
-  background-color: #E0E0E0;
+  background-color: rgba(224, 224, 224, .7);
 }
 
 #attribution {
