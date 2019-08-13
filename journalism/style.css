@@ -92,7 +92,9 @@ header {
 }
 
 #infoSection {
+  height: 500px;
   background-color: rgba(224, 224, 224, .7);
+  overflow: scroll;
 }
 
 #attribution {
