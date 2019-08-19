@@ -28,7 +28,7 @@ document.getElementById("button").addEventListener("click", function() {
 
 /* Update output page to display results for calculated neighborhood */
 function updateOutputPage(neighborhood) {
-  document.querySelectorAll(".resultText").forEach((el) => el.innerHTML = neighborhood);
+  document.querySelectorAll(".resultText").forEach(el => el.innerHTML = neighborhood);
   addNeighborhoodInfo(neighborhood);
   addNeighborhoodDataToMap(neighborhood);
 }
@@ -40,7 +40,7 @@ function addNeighborhoodInfo(neighborhood) {
 
 /* Add all data to map for the given neighborhood */
 function addNeighborhoodDataToMap(neighborhood) {
-  let boundStyle = { "color": "#46a630" };
+  let boundStyle = { "color": "#ffff00" };
   let geoJSONFeature = getNeighborhoodBound(neighborhood);
   if (geoJSONFeature) {
     L.geoJSON(geoJSONFeature, { style: boundStyle }).addTo(map);

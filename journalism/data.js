@@ -28,14 +28,14 @@ let pinCoords = {
 };
 
 let viewCoords = {
-  "Allston": [42.3573433,-71.115378,14],
-  "Back Bay": [42.3493055,-71.0905478,14],
-  "Bay Village": [42.3498003,-71.0691917,14],
+  "Allston": [42.3573433,-71.115378,12],
+  "Back Bay": [42.3493055,-71.0905478,12],
+  "Bay Village": [42.3498003,-71.0691917,12],
   "Beacon Hill": [42.3573336,-71.0702341,13.5],
-  "Brighton": [42.3491099,-71.1427447,14],
-  "Charlestown": [42.3720147,-71.0663173,13],
+  "Brighton": [42.3491099,-71.1427447,12],
+  "Charlestown": [42.3720147,-71.0663173,12],
   "Chinatown": [42.3508449,-71.0628745,15.48],
-  "Dorchester": [42.3067704,-71.0890839,13],
+  "Dorchester": [42.3067704,-71.0890839,12],
   "Downtown": [42.3572237,-71.0699231,14.58],
   "East Boston": [42.3648645,-71.0595724,13.62],
   "Fenway": [42.3424981,-71.0973112,13.3],
@@ -44,7 +44,7 @@ let viewCoords = {
   "Leather District": [42.3510546,-71.0580252,16.31],
   "Longwood": [42.3425579,-71.110806,15.04],
   "Mattapan": [42.300259,-71.1107408,13.16],
-  "Mission Hill": [42.3338358,-71.1080123,15],
+  "Mission Hill": [42.3338358,-71.1080123,12],
   "North End": [42.3638109,-71.0573227,15.46],
   "Roslindale": [42.2979365,-71.1281171,13],
   "Roxbury": [42.3241464,-71.1017691,13.29],
@@ -52,7 +52,7 @@ let viewCoords = {
   "South End": [42.3419025,-71.0751679,14.38],
   "Waterfront": [42.35731,-71.0554735,15.17],
   "West End": [42.3619161,-71.0655493,15.3],
-  "West Roxbury": [42.2916903,-71.1631525,13]
+  "West Roxbury": [42.2916903,-71.1631525,12]
 };
 
 /* HTML for info of neighborhoods to be displayed in popups */
@@ -187,31 +187,31 @@ let logoByRoute = {
 
 /* Neighborhood ranks for each category */
 let rankings = {
-  "Allston":           { "Rent": 9, "Safety": 7, "Transportation": 10, "Schools": 3, "Population": 7, "Diversity": 3, "Food": 2 },
-  "Back Bay":         { "Rent": 22, "Safety": 8, "Transportation": 6, "Schools": 3, "Population": 8, "Diversity": 0, "Food": 3 },
-  "Bay Village":      { "Rent": 19, "Safety": 5, "Transportation": 6, "Schools": 6, "Population": 8, "Diversity": 0, "Food": 2 },
-  "Beacon Hill":      { "Rent": 15, "Safety": 4, "Transportation": 3, "Schools": 6, "Population": 9, "Diversity": 0, "Food": 1 },
-  "Brighton":          { "Rent": 8, "Safety": 7, "Transportation": 10, "Schools": 4, "Population": 5, "Diversity": 0, "Food": 1 },
-  "Charlestown":      { "Rent": 11, "Safety": 2, "Transportation": 10, "Schools": 0, "Population": 7, "Diversity": 0, "Food": 4 },
-  "Chinatown":        { "Rent": 20, "Safety": 8, "Transportation": 1, "Schools": 6, "Population": 5, "Diversity": 0, "Food": 2 },
-  "Dorchester":        { "Rent": 6, "Safety": 6, "Transportation": 10, "Schools": 6, "Population": 2, "Diversity": 0, "Food": 4 },
-  "Downtown":         { "Rent": 18, "Safety": 7, "Transportation": 2, "Schools": 6, "Population": 12, "Diversity": 2, "Food": 2 },
-  "East Boston":       { "Rent": 7, "Safety": 4, "Transportation": 10, "Schools": 8, "Population": 5, "Diversity": 1, "Food": 5 },
-  "Fenway":           { "Rent": 13, "Safety": 10, "Transportation": 6, "Schools": 1, "Population": 2, "Diversity": 0, "Food": 1 },
-  "Hyde Park":         { "Rent": 1, "Safety": 5, "Transportation": 20, "Schools": 15, "Population": 9, "Diversity": 0, "Food": 8 },
-  "Jamaica Plain":    { "Rent": 10, "Safety": 3, "Transportation": 8, "Schools": 2, "Population": 2, "Diversity": 0, "Food": 1 },
-  "Leather District": { "Rent": 21, "Safety": 8, "Transportation": 4, "Schools": 6, "Population": 6, "Diversity": 0, "Food": 4 },
-  "Longwood":         { "Rent": 12, "Safety": 8, "Transportation": 10, "Schools": 4, "Population": 5, "Diversity": 0, "Food": 1 },
-  "Mattapan":          { "Rent": 2, "Safety": 12, "Transportation": 15, "Schools": 15, "Population": 6, "Diversity": 0, "Food": 8 },
-  "Mission Hill":     { "Rent": 12, "Safety": 8, "Transportation": 8, "Schools": 1, "Population": 1, "Diversity": 0, "Food": 2 },
-  "North End":        { "Rent": 18, "Safety": 6, "Transportation": 5, "Schools": 6, "Population": 12, "Diversity": 0, "Food": 4 },
-  "Roslindale":        { "Rent": 5, "Safety": 4, "Transportation": 15, "Schools": 18, "Population": 5, "Diversity": 0, "Food": 8 },
-  "Roxbury":           { "Rent": 4, "Safety": 10, "Transportation": 10, "Schools": 12, "Population": 5, "Diversity": 0, "Food": 7 },
-  "South Boston":     { "Rent": 16, "Safety": 9, "Transportation": 7, "Schools": 6, "Population": 15, "Diversity": 0, "Food": 2 },
-  "South End":        { "Rent": 14, "Safety": 8, "Transportation": 10, "Schools": 7, "Population": 4, "Diversity": 0, "Food": 3 },
-  "Waterfront":       { "Rent": 16, "Safety": 3, "Transportation": 10, "Schools": 8, "Population": 12, "Diversity": 0, "Food": 6 },
-  "West End":         { "Rent": 17, "Safety": 7, "Transportation": 4, "Schools": 7, "Population": 7, "Diversity": 0, "Food": 3 },
-  "West Roxbury":      { "Rent": 3, "Safety": 1, "Transportation": 15, "Schools": 18, "Population": 7, "Diversity": 0, "Food": 9 }
+  "Allston":           { "Rent": 9, "Safety": 2, "Transportation": 10, "Schools": 3, "Population": 3, "Diversity": 5, "Food": 2 },
+  "Back Bay":         { "Rent": 22, "Safety": 7, "Transportation": 6, "Schools": 9, "Population": 9, "Diversity": 16, "Food": 3 },
+  "Bay Village":      { "Rent": 19, "Safety": 5, "Transportation": 6, "Schools": 10, "Population": 10, "Diversity": 16, "Food": 2 },
+  "Beacon Hill":      { "Rent": 15, "Safety": 4, "Transportation": 3, "Schools": 7, "Population": 7, "Diversity": 22, "Food": 1 },
+  "Brighton":          { "Rent": 8, "Safety": 2, "Transportation": 10, "Schools": 5, "Population": 5, "Diversity": 11, "Food": 1 },
+  "Charlestown":      { "Rent": 11, "Safety": 4, "Transportation": 10, "Schools": 15, "Population": 15, "Diversity": 18, "Food": 4 },
+  "Chinatown":        { "Rent": 20, "Safety": 8, "Transportation": 1, "Schools": 10, "Population": 10, "Diversity": 3, "Food": 2 },
+  "Dorchester":        { "Rent": 6, "Safety": 3, "Transportation": 10, "Schools": 18, "Population": 18, "Diversity": 4, "Food": 4 },
+  "Downtown":         { "Rent": 18, "Safety": 7, "Transportation": 2, "Schools": 10, "Population": 10, "Diversity": 3, "Food": 2 },
+  "East Boston":       { "Rent": 7, "Safety": 1, "Transportation": 10, "Schools": 17, "Population": 17, "Diversity": 1, "Food": 5 },
+  "Fenway":           { "Rent": 13, "Safety": 7, "Transportation": 6, "Schools": 2, "Population": 2, "Diversity": 9, "Food": 1 },
+  "Hyde Park":         { "Rent": 1, "Safety": 8, "Transportation": 20, "Schools": 21, "Population": 21, "Diversity": 7, "Food": 8 },
+  "Jamaica Plain":    { "Rent": 10, "Safety": 6, "Transportation": 8, "Schools": 13, "Population": 13, "Diversity": 13, "Food": 1 },
+  "Leather District": { "Rent": 21, "Safety": 8, "Transportation": 4, "Schools": 10, "Population": 10, "Diversity": 3, "Food": 4 },
+  "Longwood":         { "Rent": 12, "Safety": 10, "Transportation": 10, "Schools": 1, "Population": 1, "Diversity": 19, "Food": 1 },
+  "Mattapan":          { "Rent": 2, "Safety": 12, "Transportation": 15, "Schools": 19, "Population": 19, "Diversity": 2, "Food": 8 },
+  "Mission Hill":     { "Rent": 12, "Safety": 8, "Transportation": 8, "Schools": 6, "Population": 6, "Diversity": 6, "Food": 2 },
+  "North End":        { "Rent": 18, "Safety": 6, "Transportation": 5, "Schools": 4, "Population": 4, "Diversity": 20, "Food": 4 },
+  "Roslindale":        { "Rent": 5, "Safety": 4, "Transportation": 15, "Schools": 20, "Population": 20, "Diversity": 10, "Food": 8 },
+  "Roxbury":           { "Rent": 4, "Safety": 10, "Transportation": 10, "Schools": 16, "Population": 16, "Diversity": 8, "Food": 7 },
+  "South Boston":     { "Rent": 16, "Safety": 9, "Transportation": 7, "Schools": 11, "Population": 11, "Diversity": 21, "Food": 2 },
+  "South End":        { "Rent": 14, "Safety": 7, "Transportation": 10, "Schools": 14, "Population": 14, "Diversity": 14, "Food": 3 },
+  "Waterfront":       { "Rent": 16, "Safety": 3, "Transportation": 10, "Schools": 8, "Population": 8, "Diversity": 17, "Food": 6 },
+  "West End":         { "Rent": 17, "Safety": 7, "Transportation": 4, "Schools": 12, "Population": 12, "Diversity": 12, "Food": 3 },
+  "West Roxbury":      { "Rent": 3, "Safety": 5, "Transportation": 15, "Schools": 22, "Population": 22, "Diversity": 15, "Food": 9 }
 }
 
 /* Calculate the best fit neighborhood given three categories */
