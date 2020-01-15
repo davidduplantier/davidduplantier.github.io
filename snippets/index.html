@@ -1,0 +1,31 @@
+<style>
+</style>
+
+<canvas id="mypic" width="500" height="667"></canvas>
+<button id="monochrome"></button>
+
+<script>
+  let img = new Image();
+  img.src = "CroissantAndCoke.jpg";
+  img.onload = function() {
+    let canvas = document.getElementById("mypic");
+    let ctx = canvas.getContext("2d");
+    ctx.drawImage(this, 0, 0);
+    let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    let data = imageData.data;
+
+    function monochrome() {
+      for (let i = 0; i < data.length; i += 4) {
+        let avg = (data[i] + data[i+1] + data[i+2]) / 3;
+        data[i] = avg;
+        data[i+1] = avg;
+        data[i+2] = avg;
+      }
+      ctx.putImageData(imageData, 0, 0);
+    }
+
+    let monochromeBtn = document.getElementById("monochrome");
+    monochromeBtn.addEventListener("click", monochrome);
+
+  }
+</script>
