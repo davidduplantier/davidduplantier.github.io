@@ -4,6 +4,7 @@
 <canvas id="mypic" width="500" height="667"></canvas>
 <button id="monochrome">Monochrome</button>
 <button id="sepia">Sepia</button>
+<button id="sobel">Sobel</button>
 
 <script>
   let img = new Image();
@@ -40,7 +41,35 @@
       ctx.putImageData(imageData, 0, 0);
     }
 
+    function sobel() {
+      const WIDTH = canvas.width;
+      const HEIGHT = canvas.height;
+      const KERNEL_X = [-1, 0, 1, -2, 2, -1, 0, 1];
+      const KERNEL_Y = [-1, -2, -1, 0, 0, 1, 2, 1];
+
+      for (let i = 0; i < data.length; i += 4) {
+        data[i] = op(i, KERNAL_X, KERNEL_Y, WIDTH, HEIGHT);
+      }
+
+      ctx.putImageData(imageData, 0, 0);
+    }
+
+    function op(i, kernal_x, kernal_y, width, height) {
+      const COORDS = [i-width-1, i-width, i-width+1, i-1, i+1, i+width-1, i+width, i+width+1];
+      let sum = 0;
+
+      for (let j = 0; j < COORDS.length; ++j) {
+        if (COORDS[j] > 0 && COORDS[j] < (width * height)) {
+          sum += data[j] * kernal_x[j];
+          sum += data[j] * kernal_y[j];
+        }
+      }
+
+      return sum;
+    }
+
     document.getElementById("monochrome").addEventListener("click", monochrome);
     document.getElementById("sepia").addEventListener("click", sepia);
+    document.getElementById("sobel").addEventListener("click", sobel);
   }
 </script>
