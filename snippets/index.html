@@ -48,20 +48,20 @@
       const KERNEL_Y = [-1, -2, -1, 0, 0, 1, 2, 1];
 
       for (let i = 0; i < data.length; i += 4) {
-        data[i] = op(i, KERNAL_X, KERNEL_Y, WIDTH, HEIGHT);
+        data[i] = op(i, KERNEL_X, KERNEL_Y, WIDTH, HEIGHT);
       }
 
       ctx.putImageData(imageData, 0, 0);
     }
 
-    function op(i, kernal_x, kernal_y, width, height) {
+    function op(i, kernel_x, kernel_y, width, height) {
       const COORDS = [i-width-1, i-width, i-width+1, i-1, i+1, i+width-1, i+width, i+width+1];
       let sum = 0;
 
       for (let j = 0; j < COORDS.length; ++j) {
         if (COORDS[j] > 0 && COORDS[j] < (width * height)) {
-          sum += data[j] * kernal_x[j];
-          sum += data[j] * kernal_y[j];
+          sum += data[j] * kernel_x[j];
+          sum += data[j] * kernel_y[j];
         }
       }
 
